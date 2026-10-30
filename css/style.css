@@ -1,0 +1,345 @@
+/* Secret Hitler web — styles. Mobile first, art-deco-ish poster palette. */
+
+:root {
+  --bg: #1b1814;
+  --bg2: #24201b;
+  --panel: #2c2721;
+  --line: #463e34;
+  --paper: #f3e6cc;
+  --ink: #2a221a;
+  --text: #efe4cf;
+  --muted: #a99b85;
+  --lib: #4f93bf;
+  --lib-dark: #2d5f80;
+  --fas: #d0533a;
+  --fas-dark: #8f2c1c;
+  --gold: #e3b34f;
+  --ok: #6dbb7a;
+  --radius: 14px;
+  --display: "Rockwell", "Roboto Slab", "Courier New", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    radial-gradient(1200px 600px at 50% -200px, #3a2b20 0%, transparent 70%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,.012) 0 2px, transparent 2px 8px),
+    var(--bg);
+  color: var(--text);
+  font: 16px/1.45 var(--sans);
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+}
+#app { max-width: 1080px; margin: 0 auto; padding: 16px 14px calc(40px + env(safe-area-inset-bottom)); }
+
+h1, h2 { font-family: var(--display); letter-spacing: .02em; }
+h2 { font-size: 1.05rem; margin: 0 0 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--paper); }
+h2 .muted { font-size: .85rem; letter-spacing: 0; text-transform: none; }
+a { color: var(--gold); }
+.muted { color: var(--muted); }
+.small { font-size: .85rem; }
+.center-text { text-align: center; }
+.ok-text { color: var(--ok); }
+.bad-text { color: var(--fas); }
+b.lib { color: var(--lib); }
+b.fas { color: var(--fas); }
+
+/* ---------- panels & buttons ---------- */
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  color: var(--text);
+  font: 600 .95rem var(--sans);
+  padding: 11px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .06s, background .15s, border-color .15s;
+}
+.btn:hover:not(:disabled) { border-color: var(--muted); }
+.btn:active:not(:disabled) { transform: scale(.98); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.primary { background: var(--fas); border-color: var(--fas); color: #fff; }
+.btn.primary:hover:not(:disabled) { background: #dd6249; border-color: #dd6249; }
+.btn.big { width: 100%; padding: 15px; font-size: 1.05rem; margin-bottom: 10px; }
+.btn.ghost { background: transparent; color: var(--muted); }
+.btn.tiny { padding: 4px 9px; font-size: .78rem; margin-left: auto; }
+.btn.danger { border-color: var(--fas); color: var(--fas); }
+.small-btn { width: 100%; margin-bottom: 10px; }
+main > .btn.ghost, .center .btn.ghost { display: block; width: 100%; }
+
+input {
+  width: 100%;
+  font: 500 1rem var(--sans);
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+input:focus { border-color: var(--gold); }
+
+.tag {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #3a332b;
+  color: var(--text);
+  margin: 2px 4px 2px 0;
+}
+.tag.gold { background: var(--gold); color: var(--ink); }
+.tag.ok { background: #2f4d34; color: #bfe6c5; }
+.tag.dim { background: transparent; border: 1px solid var(--line); color: var(--muted); }
+.tag.dead { background: #000; color: #aaa; }
+.tag.warn { background: #5a4417; color: #ffd98a; }
+
+.banner { padding: 10px 14px; border-radius: 10px; margin-bottom: 12px; font-weight: 600; font-size: .9rem; }
+.banner.warn { background: #5a4417; color: #ffe2a3; }
+.banner.dead { background: #111; color: #ccc; border: 1px solid #333; }
+
+/* ---------- toast ---------- */
+
+.toast {
+  position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom));
+  transform: translate(-50%, 30px); opacity: 0; pointer-events: none;
+  background: var(--paper); color: var(--ink); font-weight: 600;
+  padding: 12px 18px; border-radius: 10px; max-width: calc(100% - 32px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.4); transition: .25s; z-index: 50;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast.bad { background: var(--fas); color: #fff; }
+
+/* ---------- home ---------- */
+
+.home { max-width: 460px; margin: 0 auto; }
+.title { text-align: center; padding: 28px 0 22px; }
+.title h1 {
+  margin: 4px 0;
+  font-size: clamp(2.6rem, 11vw, 3.6rem);
+  line-height: 1;
+  color: var(--paper);
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 var(--fas-dark);
+}
+.title-top, .title-sub { color: var(--muted); text-transform: uppercase; letter-spacing: .25em; font-size: .72rem; }
+.field { display: block; margin-bottom: 14px; }
+.field span { display: block; font-size: .8rem; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .1em; }
+.or { text-align: center; color: var(--muted); font-size: .8rem; margin: 8px 0 12px; position: relative; }
+.or::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--line); }
+.or span { background: var(--panel); padding: 0 10px; position: relative; }
+.join-row { display: flex; gap: 8px; }
+.code-input { text-transform: uppercase; letter-spacing: .3em; font-family: var(--display); font-weight: 700; text-align: center; }
+.invite { margin: 4px 0 14px; text-align: center; }
+.code { font-family: var(--display); letter-spacing: .15em; color: var(--gold); }
+.rules summary { cursor: pointer; font-weight: 700; }
+.rules p { font-size: .92rem; color: #ddd0b8; }
+.foot { text-align: center; color: var(--muted); font-size: .75rem; padding: 6px 10px; }
+
+/* ---------- connecting ---------- */
+
+.center { text-align: center; padding-top: 25vh; max-width: 360px; margin: 0 auto; }
+.spinner {
+  width: 42px; height: 42px; margin: 0 auto 16px;
+  border: 4px solid var(--line); border-top-color: var(--gold); border-radius: 50%;
+  animation: spin .9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- lobby ---------- */
+
+.lobby { max-width: 520px; margin: 0 auto; }
+.room { text-align: center; }
+.big-code {
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(2.8rem, 14vw, 4rem); letter-spacing: .2em; color: var(--gold);
+  margin: 2px 0 12px; padding-left: .2em;
+}
+.link-row { display: flex; gap: 8px; }
+.link { font-size: .85rem; color: var(--muted); }
+.lobby-list { list-style: none; padding: 0; margin: 0 0 8px; }
+.lobby-list li { display: flex; align-items: center; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.lobby-list li:last-child { border-bottom: 0; }
+.lobby-list li.offline .pname { color: var(--muted); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #666; flex: none; }
+.dot.on { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+.waiting { text-align: center; color: var(--muted); }
+
+/* ---------- game layout ---------- */
+
+.game-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.game-grid { display: grid; gap: 0 16px; }
+@media (min-width: 860px) {
+  .game-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: start; }
+}
+
+/* ---------- action panel ---------- */
+
+.action {
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.action.waiting { text-align: center; }
+.action.waiting .action-title { color: var(--muted); font-weight: 600; font-size: 1rem; font-family: var(--sans); }
+.action.mine {
+  background: linear-gradient(180deg, #3a2a20, var(--panel));
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px rgba(227,179,79,.2), 0 10px 30px rgba(0,0,0,.3);
+}
+.action-kicker { text-transform: uppercase; letter-spacing: .18em; font-size: .7rem; color: var(--gold); font-weight: 700; }
+.action-title { font-family: var(--display); font-size: 1.35rem; margin: 2px 0 10px; color: var(--paper); }
+.action .btn.primary { width: 100%; margin-top: 10px; }
+.action .btn.ghost { width: 100%; margin-top: 8px; }
+
+.targets { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+.btn.target { padding: 12px 8px; }
+.btn.target.selected { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+.govt { display: flex; gap: 10px; margin-bottom: 12px; }
+.govt span { flex: 1; background: var(--bg); border-radius: 10px; padding: 8px 10px; text-align: center; font-weight: 700; }
+.govt small { display: block; color: var(--muted); font-weight: 500; font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; }
+
+.vote-row { display: flex; gap: 10px; }
+.vote {
+  flex: 1; appearance: none; cursor: pointer;
+  font: 800 1.5rem var(--display);
+  padding: 20px 8px; border-radius: 12px;
+  border: 3px solid transparent; color: var(--ink);
+  transition: transform .06s, box-shadow .15s;
+}
+.vote:active { transform: scale(.97); }
+.vote.ja { background: var(--paper); }
+.vote.nein { background: #2a2420; color: var(--paper); border-color: #4b4036; }
+.vote.selected { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(227,179,79,.35); }
+.vote-row .vote { font-size: clamp(1rem, 4.5vw, 1.5rem); }
+
+/* policy cards */
+.hand { display: flex; gap: 10px; justify-content: center; margin: 6px 0 4px; }
+.policy {
+  appearance: none; border: 0; padding: 6px; cursor: pointer;
+  width: 30%; max-width: 120px; aspect-ratio: 5 / 7;
+  border-radius: 10px; color: #fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+  transition: transform .12s, box-shadow .12s;
+}
+.policy:disabled { cursor: default; }
+.policy.lib { background: var(--lib); }
+.policy.fas { background: var(--fas); }
+.policy-inner {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  height: 100%; border: 2px solid rgba(255,255,255,.55); border-radius: 7px;
+  font: 800 .95rem var(--display); text-transform: uppercase; letter-spacing: .05em;
+}
+.policy-inner small { font: 600 .62rem var(--sans); letter-spacing: .15em; opacity: .85; }
+.policy-mark { font-size: 1.8rem; line-height: 1; margin-bottom: 4px; }
+.policy.selected { transform: translateY(-8px); box-shadow: 0 0 0 3px var(--gold), 0 14px 22px rgba(0,0,0,.45); }
+
+.reveal { text-align: center; font-size: 1.2rem; padding: 18px; border-radius: 12px; margin: 6px 0; }
+.reveal.lib { background: var(--lib-dark); }
+.reveal.fas { background: var(--fas-dark); }
+
+/* game over */
+.action.gameover { text-align: center; border-width: 2px; }
+.action.gameover.lib { border-color: var(--lib); background: linear-gradient(180deg, #213a4a, var(--panel)); }
+.action.gameover.fas { border-color: var(--fas); background: linear-gradient(180deg, #4a2219, var(--panel)); }
+.win-title { font: 800 2.2rem var(--display); text-transform: uppercase; color: var(--paper); margin: 4px 0; }
+.role-reveal { list-style: none; padding: 0; margin: 12px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; text-align: left; }
+.role-reveal li { display: flex; justify-content: space-between; padding: 8px 10px; border-radius: 8px; background: var(--bg); border-left: 4px solid var(--lib); }
+.role-reveal li.fascist { border-left-color: var(--fas); }
+.role-reveal li.hitler { border-left-color: var(--fas); background: #3a1810; }
+
+/* ---------- role card ---------- */
+
+.role-panel { padding: 0; overflow: hidden; }
+.role-toggle {
+  appearance: none; width: 100%; display: flex; justify-content: space-between; align-items: center;
+  background: transparent; border: 0; color: var(--paper); cursor: pointer;
+  padding: 14px 16px; font: 700 .95rem var(--sans); text-transform: uppercase; letter-spacing: .1em;
+}
+.role-panel > :not(.role-toggle) { margin-left: 16px; margin-right: 16px; }
+.role-panel > :last-child:not(.role-toggle) { margin-bottom: 16px; }
+.role-card { border-radius: 12px; padding: 22px 12px; text-align: center; color: #fff; }
+.role-card.liberal { background: linear-gradient(160deg, var(--lib), var(--lib-dark)); }
+.role-card.fascist { background: linear-gradient(160deg, var(--fas), var(--fas-dark)); }
+.role-card.hitler { background: linear-gradient(160deg, #6f1d12, #1d0a06); border: 2px solid var(--fas); }
+.role-name { font: 800 2.2rem var(--display); text-transform: uppercase; letter-spacing: .1em; }
+.role-party { opacity: .85; font-size: .9rem; }
+.known { list-style: none; padding: 0; margin: 4px 0 6px; }
+.known li { display: flex; justify-content: space-between; padding: 6px 10px; background: var(--bg); border-radius: 8px; margin-bottom: 4px; border-left: 4px solid var(--fas); }
+.known li.liberal { border-left-color: var(--lib); }
+
+/* ---------- boards ---------- */
+
+.track-label { display: flex; justify-content: space-between; font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; margin: 2px 0 6px; }
+.track-label.lib { color: var(--lib); }
+.track-label.fas { color: var(--fas); }
+.track { display: grid; gap: 6px; margin-bottom: 12px; }
+.track.lib { grid-template-columns: repeat(5, 1fr); }
+.track.fas { grid-template-columns: repeat(6, 1fr); }
+.slot {
+  aspect-ratio: 5 / 7; border-radius: 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  font-size: 1.4rem; padding: 3px; line-height: 1.1;
+}
+.track.lib .slot { background: rgba(79,147,191,.12); border: 1px dashed rgba(79,147,191,.5); color: var(--lib); }
+.track.fas .slot { background: rgba(208,83,58,.1); border: 1px dashed rgba(208,83,58,.5); color: var(--fas); }
+.track.fas .slot.danger:not(.filled) { background: rgba(208,83,58,.18); }
+.slot small { font-size: .58rem; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; opacity: .9; }
+.slot em { font-size: .55rem; font-style: normal; opacity: .75; margin-top: 2px; }
+.slot.filled { border-style: solid; color: #fff; box-shadow: inset 0 0 0 2px rgba(255,255,255,.4); animation: pop .35s ease-out; }
+.slot.filled.lib { background: var(--lib); }
+.slot.filled.fas { background: var(--fas); }
+@keyframes pop { from { transform: scale(.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.hitler-warn { text-align: center; font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; color: #ffb3a3; margin: -4px 0 10px; }
+.meta-row { display: flex; justify-content: space-between; gap: 8px; border-top: 1px solid var(--line); padding-top: 10px; }
+.meta-row > div { text-align: center; flex: 1; }
+.meta-row small { display: block; color: var(--muted); font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; }
+.pips { display: flex; gap: 6px; justify-content: center; margin-top: 4px; }
+.pip { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--muted); }
+.pip.on { background: var(--gold); border-color: var(--gold); }
+
+/* ---------- players ---------- */
+
+.players { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.players li { background: var(--bg2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+.players li.is-me { border-color: #6b5b45; }
+.players li.is-dead { opacity: .5; }
+.players li.is-dead .pname { text-decoration: line-through; }
+.p-top { display: flex; justify-content: space-between; align-items: center; }
+.pname { font-weight: 700; }
+.p-tags { min-height: 4px; }
+.last-vote { font: 800 .8rem var(--display); padding: 2px 8px; border-radius: 6px; }
+.last-vote.ja { background: var(--paper); color: var(--ink); }
+.last-vote.nein { background: #111; color: var(--paper); }
+.role-chip { display: inline-block; font-size: .7rem; font-weight: 700; padding: 2px 7px; border-radius: 999px; color: #fff; margin: 2px 0; }
+.role-chip.liberal { background: var(--lib); }
+.role-chip.fascist { background: var(--fas); }
+.role-chip.hitler { background: #6f1d12; border: 1px solid var(--fas); }
+
+/* ---------- log ---------- */
+
+.log ul { list-style: none; padding: 0; margin: 0; max-height: 320px; overflow-y: auto; font-size: .86rem; }
+.log li { padding: 6px 0 6px 10px; border-left: 3px solid var(--line); margin-bottom: 2px; color: #d9ccb4; }
+.log li.liberal { border-left-color: var(--lib); }
+.log li.fascist, .log li.bad { border-left-color: var(--fas); }
+.log li.good { border-left-color: var(--ok); }
+.log li.power { border-left-color: var(--gold); }
+.log li.system { color: var(--muted); }
